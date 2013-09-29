@@ -18,12 +18,13 @@ Watcher.watch = function(obj, hasOwn) {
 					modifiers[m].before = [];
 					modifiers[m].after = [];
 					watchable[m] = function() {
-						for (var i = 0; i < modifiers[m].before.length; i++) {
-							modifiers[m].before[i].apply(this, arguments);
+						var mod = modifiers[m];
+						for (var i = 0; i < mod.before.length; i++) {
+							mod.before[i].apply(this, arguments);
 						}
 						prop.apply(watchable, arguments);
-						for (var i = 0; i < modifiers[m].after.length; i++) {
-							modifiers[m].after[i].apply(this, arguments);
+						for (var i = 0; i < mod.after.length; i++) {
+							mod.after[i].apply(this, arguments);
 						}
 					};
 				}
